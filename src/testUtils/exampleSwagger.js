@@ -26,7 +26,7 @@ export default {
         ],
         'description': 'Get blogs by Bloger id\n',
 
-        'summary': 'THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG. THIS NAME IS WAY TO LONG.',
+        'summary': '',
         'consumes': [
           'text/html'
         ],

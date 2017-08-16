@@ -21,7 +21,7 @@ try {
   const lineMap = mapLines(swagger)
   const requirements = getRequirementsArray(collectRequirements(), obj)
   const results = lintObject(obj, requirements)
-
+  console.log(requirements[2].requirements)
   if (_.keys(results).length) {
     for (let severity in results) {
       results[severity].forEach((result) => {

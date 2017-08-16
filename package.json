@@ -5,10 +5,14 @@
   "main": "index.js",
   "author": "Patrick Dent",
   "license": "Apache-2.0",
+  "jest": {
+    "collectCoverageFrom": ["src/*", "!src/warnings.js", "!src/errors.js", "!src/optimizations.js"],
+    "rootDir": "src"
+  },
   "scripts": {
     "build": "rm -rf ./lib && standard --fix && babel -d ./lib ./src -s",
     "build-fast": "babel -d ./lib ./src -s",
-    "test": "standard --fix && jest",
+    "test": "standard --fix && jest --coverage",
     "test-watch": "jest --watch"
   },
   "repository": "Nordstrom/posture",
