@@ -1,15 +1,27 @@
 {
   "name": "posture",
-  "version": "0.2.1",
+  "version": "0.3.2",
   "description": "an opinionated linter for swagger",
   "main": "index.js",
   "author": "Patrick Dent",
   "license": "Apache-2.0",
+  "jest": {
+    "collectCoverageFrom": [
+      "src/*",
+      "!src/warnings.js",
+      "!src/errors.js",
+      "!src/optimizations.js",
+      "!src/cli.js"
+    ],
+    "rootDir": "src"
+  },
   "scripts": {
     "build": "rm -rf ./lib && standard --fix && babel -d ./lib ./src -s",
     "build-fast": "babel -d ./lib ./src -s",
-    "test": "standard --fix && jest",
-    "test-watch": "jest --watch"
+    "test": "standard --fix && jest --coverage",
+    "test-watch": "jest --watch",
+    "cov": "standard --fix && jest --coverage && open coverage/lcov-report/index.html",
+    "try": "rm -rf ./lib && babel -d ./lib ./src -s && node lib/cli.js"
   },
   "repository": "Nordstrom/posture",
   "devDependencies": {
@@ -19,6 +31,7 @@
     "babel-preset-babili": "^0.1.4",
     "babel-preset-es2015": "^6.24.1",
     "babili": "^0.1.4",
+    "codecov": "^2.3.0",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
     "standard": "^10.0.2"

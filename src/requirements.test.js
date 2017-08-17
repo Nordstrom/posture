@@ -1,4 +1,4 @@
-import { getRequirementsArray } from './requirements'
+import { getRequirements } from './requirements'
 import exampleSwagger from './testUtils/exampleSwagger'
 
 const warnings = {
@@ -8,7 +8,7 @@ const warnings = {
 }
 
 it('builds requirements from common Operations', () => {
-  var reqArr = getRequirementsArray({ warnings }, exampleSwagger)
+  var reqs = getRequirements({ warnings }, exampleSwagger)
   var expected = {
     get: [ 'field' ],
     put: [ 'field' ],
@@ -19,11 +19,11 @@ it('builds requirements from common Operations', () => {
     patch: [ 'field' ]
   }
 
-  expect(reqArr[0].requirements['path-error']).toEqual(expected)
+  expect(reqs.severities[0].requirements['path-error']).toEqual(expected)
 })
 
 it('builds requirements from Definiton Keys and Property Keys', () => {
-  var reqArr = getRequirementsArray({ warnings }, exampleSwagger)
+  var reqs = getRequirements({ warnings }, exampleSwagger)
   var expected = {
     'blog': [
       'field'
@@ -63,5 +63,5 @@ it('builds requirements from Definiton Keys and Property Keys', () => {
     ]
   }
 
-  expect(reqArr[0].requirements['definiton-error']).toEqual(expected)
+  expect(reqs.severities[0].requirements['definiton-error']).toEqual(expected)
 })

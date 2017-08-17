@@ -4,4 +4,7 @@
 # production
 /lib
 
+#test
+/coverage
+
 .DS_STORE

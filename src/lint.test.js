@@ -1,35 +1,61 @@
-import exampleSwagger from './testUtils/exampleSwagger'
+import exampleSwagger from './testUtils/petStoreSwagger'
+import requirements from './testUtils/petStoreRequirements'
 import lintSwagger from './lint'
 
 it('returns array of message objects by severity', () => {
-  const requirementsArray = [{
-    severity: 'warnings',
-    requirements: {
-      missing: {
-        root: ['tags'],
-        get: [ 'field' ],
-        put: [ 'field' ],
-        post: [ 'field' ],
-        delete: [ 'field' ],
-        options: [ 'field' ],
-        head: [ 'field' ],
-        patch: [ 'field' ],
-        propOne: [ 'field' ],
-        propArray: [ 'field' ]
-      }
-    }
-  }]
-
   const expectedResults = {
-    warnings: [
-      { pathKey: 'missing_root_paths_PATH_OPERATION_field',
-        params: { '$PATH': '/blog', '$OPERATION': 'get' } },
-      { pathKey: 'missing_root_paths_PATH_OPERATION_field',
-        params: { '$PATH': '/blog', '$OPERATION': 'post' } },
-      { pathKey: 'missing_root_paths_PATH_OPERATION_field',
-        params: { '$PATH': '/profile', '$OPERATION': 'get' } }
+    'errors': [
+      {
+        'pathKey': 'missing_root_consumes',
+        'params': {}
+      }
+    ],
+    'optimizations': [
+      {
+        'pathKey': 'missing_root_tags_default',
+        'params': {}
+      },
+      {
+        'pathKey': 'missing_root_tags_default',
+        'params': {}
+      },
+      {
+        'pathKey': 'missing_root_tags_default',
+        'params': {}
+      },
+      {
+        'pathKey': 'missing_root_paths_PATH_OPERATION_parameters_default',
+        'params': {
+          '$PATH': '/pet/findByStatus',
+          '$OPERATION': 'get',
+          '$SCHEMA': 'status'
+        }
+      },
+      {
+        'pathKey': 'missing_root_definitions_DEFKEY_properties_PROPKEY_default',
+        'params': {
+          '$DEFKEY': 'Order',
+          '$PROPKEY': 'id'
+        }
+      }
+    ],
+    'warnings': [
+      {
+        'pathKey': 'length-10-75_root_paths_PATH_OPERATION_summary',
+        'params': {
+          '$PATH': '/pet',
+          '$OPERATION': 'post'
+        }
+      },
+      {
+        'pathKey': 'length-25-10000_root_paths_PATH_OPERATION_description',
+        'params': {
+          '$PATH': '/pet',
+          '$OPERATION': 'post'
+        }
+      }
     ]
   }
-  const results = lintSwagger(exampleSwagger, requirementsArray)
-  expect(results.warnings).toEqual(expectedResults.warnings)
+  const results = lintSwagger(exampleSwagger, requirements)
+  expect(results).toEqual(expectedResults)
 })

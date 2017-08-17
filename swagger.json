@@ -15,6 +15,7 @@
   },
   "host": "petstore.swagger.io",
   "basePath": "/v2",
+  "produces": ["text/html", "application/json"],
   "tags": [
     {
       "name": "pet",
@@ -46,7 +47,7 @@
         "tags": [
           "pet"
         ],
-        "summary": "Add a new pet to the store",
+        "summary": "",
         "description": "",
         "operationId": "addPet",
         "consumes": [
@@ -87,7 +88,7 @@
           "pet"
         ],
         "summary": "Update an existing pet",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "updatePet",
         "consumes": [
           "application/json",
@@ -206,7 +207,8 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "collectionFormat": "multi",
+            "default": "string"
           }
         ],
         "responses": {
@@ -240,7 +242,7 @@
           "pet"
         ],
         "summary": "Find pet by ID",
-        "description": "Returns a single pet",
+        "description": "Returns a single pet in XML or JSON, retrieved by ID",
         "operationId": "getPetById",
         "produces": [
           "application/xml",
@@ -253,7 +255,8 @@
             "description": "ID of pet to return",
             "required": true,
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "default": 4
           }
         ],
         "responses": {
@@ -281,7 +284,7 @@
           "pet"
         ],
         "summary": "Updates a pet in the store with form data",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "updatePetWithForm",
         "consumes": [
           "application/x-www-form-urlencoded"
@@ -297,21 +300,24 @@
             "description": "ID of pet that needs to be updated",
             "required": true,
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "default": 4
           },
           {
             "name": "name",
             "in": "formData",
             "description": "Updated name of the pet",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "default": "rex"
           },
           {
             "name": "status",
             "in": "formData",
             "description": "Updated status of the pet",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "default": "happy"
           }
         ],
         "responses": {
@@ -333,7 +339,7 @@
           "pet"
         ],
         "summary": "Deletes a pet",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "deletePet",
         "produces": [
           "application/xml",
@@ -344,7 +350,8 @@
             "name": "api_key",
             "in": "header",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "default": "key"
           },
           {
             "name": "petId",
@@ -352,7 +359,8 @@
             "description": "Pet id to delete",
             "required": true,
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "default": 4
           }
         ],
         "responses": {
@@ -379,7 +387,7 @@
           "pet"
         ],
         "summary": "uploads an image",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "uploadFile",
         "consumes": [
           "multipart/form-data"
@@ -394,21 +402,24 @@
             "description": "ID of pet to update",
             "required": true,
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "default": 4
           },
           {
             "name": "additionalMetadata",
             "in": "formData",
             "description": "Additional data to pass to server",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "default": "some data"
           },
           {
             "name": "file",
             "in": "formData",
             "description": "file to upload",
             "required": false,
-            "type": "file"
+            "type": "file",
+            "default": "path/to/thing"
           }
         ],
         "responses": {
@@ -466,7 +477,7 @@
           "store"
         ],
         "summary": "Place an order for a pet",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "placeOrder",
         "produces": [
           "application/xml",
@@ -517,7 +528,8 @@
             "type": "integer",
             "maximum": 10.0,
             "minimum": 1.0,
-            "format": "int64"
+            "format": "int64",
+            "default": 5
           }
         ],
         "responses": {
@@ -554,7 +566,8 @@
             "required": true,
             "type": "integer",
             "minimum": 1.0,
-            "format": "int64"
+            "format": "int64",
+            "default": 4
           }
         ],
         "responses": {
@@ -603,7 +616,7 @@
           "user"
         ],
         "summary": "Creates list of users with given input array",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "createUsersWithArrayInput",
         "produces": [
           "application/xml",
@@ -636,7 +649,7 @@
           "user"
         ],
         "summary": "Creates list of users with given input array",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "createUsersWithListInput",
         "produces": [
           "application/xml",
@@ -669,7 +682,7 @@
           "user"
         ],
         "summary": "Logs user into the system",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "loginUser",
         "produces": [
           "application/xml",
@@ -681,14 +694,16 @@
             "in": "query",
             "description": "The user name for login",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "default": "user"
           },
           {
             "name": "password",
             "in": "query",
             "description": "The password for login in clear text",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "default": "password"
           }
         ],
         "responses": {
@@ -722,7 +737,7 @@
           "user"
         ],
         "summary": "Logs out current logged in user session",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "logoutUser",
         "produces": [
           "application/xml",
@@ -742,7 +757,7 @@
           "user"
         ],
         "summary": "Get user by user name",
-        "description": "",
+        "description": "This is a very nice long description. This is a very nice long description. This is a very nice long description. ",
         "operationId": "getUserByName",
         "produces": [
           "application/xml",
@@ -754,7 +769,8 @@
             "in": "path",
             "description": "The name that needs to be fetched. Use user1 for testing. ",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "default": "user"
           }
         ],
         "responses": {
@@ -789,7 +805,8 @@
             "in": "path",
             "description": "name that need to be updated",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "default": "user"
           },
           {
             "in": "body",
@@ -827,7 +844,8 @@
             "in": "path",
             "description": "The name that needs to be deleted",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "default": "user"
           }
         ],
         "responses": {
@@ -867,15 +885,18 @@
         },
         "petId": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "default": 4
         },
         "quantity": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 1
         },
         "shipDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "default": "11/17/17"
         },
         "status": {
           "type": "string",
@@ -884,7 +905,8 @@
             "placed",
             "approved",
             "delivered"
-          ]
+          ],
+          "default": [ "11/17/17", "11/17/17", "11/17/17"]
         },
         "complete": {
           "type": "boolean",
@@ -900,10 +922,12 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "default": 4
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": "name"
         }
       },
       "xml": {
@@ -915,30 +939,38 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "default": 4
         },
         "username": {
-          "type": "string"
+          "type": "string",
+          "default": "name"
         },
         "firstName": {
-          "type": "string"
+          "type": "string",
+          "default": "first"
         },
         "lastName": {
-          "type": "string"
+          "type": "string",
+          "default": "last"
         },
         "email": {
-          "type": "string"
+          "type": "string",
+          "default": "example@example.com"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "default": "password"
         },
         "phone": {
-          "type": "string"
+          "type": "string",
+          "default": "5555555555"
         },
         "userStatus": {
           "type": "integer",
           "format": "int32",
-          "description": "User Status"
+          "description": "User Status",
+          "default": 1
         }
       },
       "xml": {
@@ -950,10 +982,12 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "default": 1
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": "name"
         }
       },
       "xml": {
@@ -965,13 +999,16 @@
       "properties": {
         "code": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 1
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "default": "type"
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "default": "message"
         }
       }
     },
@@ -984,14 +1021,15 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "default": 4
         },
         "category": {
           "$ref": "#/definitions/Category"
         },
         "name": {
           "type": "string",
-          "example": "doggie"
+          "default": "doggie"
         },
         "photoUrls": {
           "type": "array",
@@ -1001,7 +1039,8 @@
           },
           "items": {
             "type": "string"
-          }
+          },
+          "default": [ "/path" ]
         },
         "tags": {
           "type": "array",
@@ -1011,7 +1050,8 @@
           },
           "items": {
             "$ref": "#/definitions/Tag"
-          }
+          },
+          "default": [ "cute" ]
         },
         "status": {
           "type": "string",
@@ -1020,7 +1060,8 @@
             "available",
             "pending",
             "sold"
-          ]
+          ],
+          "default": [ 4, 4, 4 ]
         }
       },
       "xml": {

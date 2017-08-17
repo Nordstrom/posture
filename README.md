@@ -1,3 +1,6 @@
+![Build Status](https://travis-ci.org/Nordstrom/posture.svg?branch=master)
+![codecov](https://codecov.io/gh/Nordstrom/posture/branch/master/graph/badge.svg)
+
 # Posture - an opinionated Swagger linter
 optimize your swagger documentation
 
