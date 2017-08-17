@@ -6,7 +6,7 @@
   "author": "Patrick Dent",
   "license": "Apache-2.0",
   "jest": {
-    "collectCoverageFrom": ["src/*", "!src/warnings.js", "!src/errors.js", "!src/optimizations.js"],
+    "collectCoverageFrom": ["src/*", "!src/warnings.js", "!src/errors.js", "!src/optimizations.js", "!src/cli.js"],
     "rootDir": "src"
   },
   "scripts": {
