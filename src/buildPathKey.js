@@ -8,7 +8,7 @@ const buildPathKey = (prefix, pathArray, currentKey, obj, keyVars) => {
     composedPath = `${composedPath}${extractVariableKeyNamesToParams(key, index, params, fullKeyPath, obj, keyVars)}`
   })
 
-  return { pathKey: `${prefix}${composedPath}`, params }
+  return params.falsePositive ? null : { pathKey: `${prefix}${composedPath}`, params }
 }
 
 const extractVariableKeyNamesToParams = (key, index, params, fullKeyPath, obj, keyVars) => {
@@ -20,21 +20,19 @@ const extractVariableKeyNamesToParams = (key, index, params, fullKeyPath, obj, k
     _.set(params, '$OPERATION', key)
     return '_OPERATION'
   }
-  if (keyVars.defKeys.includes(key)) {
-    if (fullKeyPath[index - 1] === 'definitions') {
-      _.set(params, '$DEFKEY', key)
-      return '_DEFKEY'
-    }
+  if (keyVars.defKeys.includes(key) && fullKeyPath[index - 1] === 'definitions') {
+    _.set(params, '$DEFKEY', key)
+    return '_DEFKEY'
   }
-  if (keyVars.propKeys.includes(key)) {
-    if (fullKeyPath[index - 1] === 'properties') {
-      _.set(params, '$PROPKEY', key)
-      return '_PROPKEY'
-    }
+  if (keyVars.propKeys.includes(key) && fullKeyPath[index - 1] === 'properties') {
+    _.set(params, '$PROPKEY', key)
+    return '_PROPKEY'
   }
   if (key === 'default') {
-    if (obj.required === false || obj['x-example'] || obj['schema']) { _.set(params, 'falsePositive', true) }
-    if (fullKeyPath[index - 1] === 'parameters') { _.set(params, '$SCHEMA', obj.name) }
+    if (obj.required === false || obj['x-example'] || obj['schema'] || obj['$ref']) { _.set(params, 'falsePositive', true) }
+    if (fullKeyPath[index - 1] === 'parameters') {
+      _.set(params, '$SCHEMA', obj.name)
+    }
   }
   return `_${key}`
 }

@@ -6,7 +6,8 @@ const checkFieldPresence = (requiredKeys, severity, currentObject, results, obje
   requiredKeys.forEach((key) => {
     if (!keys.includes(key)) {
       _.update(results, severity, (r = []) => {
-        return _.concat(r, buildPathKey('missing', objectPath, key, currentObject, keyVars))
+        var pathKey = buildPathKey('missing', objectPath, key, currentObject, keyVars)
+        return pathKey ? _.concat(r, pathKey) : r
       })
     }
   })
@@ -18,7 +19,8 @@ const checkFieldLength = (requiredKeys, severity, currentObject, results, object
     if (keys.includes(key)) {
       if (currentObject[key].length < min || currentObject[key].length > max) {
         _.update(results, severity, (r = []) => {
-          return _.concat(r, buildPathKey(`length-${min}-${max}`, objectPath, key, currentObject, keyVars))
+          var pathKey = buildPathKey(`length-${min}-${max}`, objectPath, key, currentObject, keyVars)
+          return pathKey ? _.concat(r, pathKey) : r
         })
       }
     }

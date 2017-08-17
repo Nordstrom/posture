@@ -39,8 +39,7 @@ export default {
             'in': 'query',
             'description': 'Get all blogs for supplied blogid',
             'required': true,
-            'type': 'number',
-            'x-exampleX': 666
+            'type': 'number'
           },
           {
             'name': 'pagesize',
@@ -287,7 +286,8 @@ export default {
         'usernickname': {
           'type': 'string',
           'description': 'user nickname. user nickname should contains only alphanumeric characters',
-          'pattern': '[A-Za-z0-9]{4,25}'
+          'pattern': '[A-Za-z0-9]{4,25}',
+          'x-example': 'exampleuser'
         }
       }
     },
