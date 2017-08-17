@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.org/Nordstrom/posture.svg?branch=master)
+
 # Posture - an opinionated Swagger linter
 optimize your swagger documentation
 
