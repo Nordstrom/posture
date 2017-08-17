@@ -1,24 +1,24 @@
 import _ from 'lodash'
 import buildPathKey from './buildPathKey'
 
-const checkFieldPresence = (requiredKeys, severity, currentObject, results, objectPath) => {
+const checkFieldPresence = (requiredKeys, severity, currentObject, results, objectPath, keyVars) => {
   const keys = _.keys(currentObject)
   requiredKeys.forEach((key) => {
     if (!keys.includes(key)) {
       _.update(results, severity, (r = []) => {
-        return _.concat(r, buildPathKey('missing', objectPath, key, currentObject))
+        return _.concat(r, buildPathKey('missing', objectPath, key, currentObject, keyVars))
       })
     }
   })
 }
 
-const checkFieldLength = (requiredKeys, severity, currentObject, results, objectPath, min, max) => {
+const checkFieldLength = (requiredKeys, severity, currentObject, results, objectPath, keyVars, min, max) => {
   const keys = _.keys(currentObject)
   requiredKeys.forEach((key) => {
     if (keys.includes(key)) {
       if (currentObject[key].length < min || currentObject[key].length > max) {
         _.update(results, severity, (r = []) => {
-          return _.concat(r, buildPathKey(`length-${min}-${max}`, objectPath, key, currentObject))
+          return _.concat(r, buildPathKey(`length-${min}-${max}`, objectPath, key, currentObject, keyVars))
         })
       }
     }
@@ -26,7 +26,7 @@ const checkFieldLength = (requiredKeys, severity, currentObject, results, object
 }
 
 const lintObject = (currentObject, results, objectPath, requirements) => {
-  requirements.forEach((r) => {
+  requirements.severities.forEach((r) => {
     // severities are warn, error, etc...
     const severity = r.severity
 
@@ -35,11 +35,11 @@ const lintObject = (currentObject, results, objectPath, requirements) => {
       // continue if current object doesn't have any fields that match the current requirement
       if (!requiredKeys) { continue }
       if (requirement === 'missing') {
-        checkFieldPresence(requiredKeys, severity, currentObject, results, objectPath)
+        checkFieldPresence(requiredKeys, severity, currentObject, results, objectPath, requirements.keyVars)
       }
       if (requirement.split('-')[0] === 'length') {
         var [ , min, max ] = requirement.split('-')
-        checkFieldLength(requiredKeys, severity, currentObject, results, objectPath, min, max)
+        checkFieldLength(requiredKeys, severity, currentObject, results, objectPath, requirements.keyVars, min, max)
       }
     }
   })

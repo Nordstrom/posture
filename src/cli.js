@@ -5,9 +5,12 @@ import fs from 'fs'
 import chalk from 'chalk'
 import _ from 'lodash'
 import lintObject from './lint'
-import { getRequirementsArray, collectRequirements } from './requirements'
+import { getRequirements } from './requirements'
 import { buildMessage } from './messages'
 import mapLines from './mapLines'
+import errors from './errors'
+import warnings from './warnings'
+import optimizations from './optimizations'
 
 program
     .version('0.1.0')
@@ -15,17 +18,17 @@ program
     .parse(process.argv)
 
 try {
+  const messages = { errors, warnings, optimizations }
   var file = program.swagger ? program.swagger : './swagger.json'
   const swagger = fs.readFileSync(file, 'utf8')
   const obj = JSON.parse(swagger)
   const lineMap = mapLines(swagger)
-  const requirements = getRequirementsArray(collectRequirements(), obj)
+  const requirements = getRequirements(messages, obj)
   const results = lintObject(obj, requirements)
-  console.log(requirements[2].requirements)
   if (_.keys(results).length) {
     for (let severity in results) {
       results[severity].forEach((result) => {
-        var message = buildMessage(severity, result, lineMap, collectRequirements())
+        var message = buildMessage(severity, result, lineMap, messages)
         if (message) { console.log(message) }
       })
     }
