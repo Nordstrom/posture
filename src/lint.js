@@ -16,13 +16,11 @@ const checkFieldPresence = (requiredKeys, severity, currentObject, results, obje
 const checkFieldLength = (requiredKeys, severity, currentObject, results, objectPath, keyVars, min, max) => {
   const keys = _.keys(currentObject)
   requiredKeys.forEach((key) => {
-    if (keys.includes(key)) {
-      if (currentObject[key].length < min || currentObject[key].length > max) {
-        _.update(results, severity, (r = []) => {
-          var pathKey = buildPathKey(`length-${min}-${max}`, objectPath, key, currentObject, keyVars)
-          return pathKey ? _.concat(r, pathKey) : r
-        })
-      }
+    if (keys.includes(key) && (currentObject[key].length < min || currentObject[key].length > max)) {
+      _.update(results, severity, (r = []) => {
+        var pathKey = buildPathKey(`length-${min}-${max}`, objectPath, key, currentObject, keyVars)
+        return _.concat(r, pathKey)
+      })
     }
   })
 }

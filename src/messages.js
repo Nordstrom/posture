@@ -1,8 +1,9 @@
 import _ from 'lodash'
 
 export const buildMessage = (severity, response, lineMap, messages) => {
-  var message = messages[severity][response.pathKey]
-  if (!message || response.params.falsePositive) { return }
+  var message =
+  messages[severity][response.pathKey]
+  if (!message) { return null }
 
   message = message(lineMap[getCorrectPath(response)])
   for (var key in response.params) {
