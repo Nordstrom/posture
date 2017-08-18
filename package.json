@@ -1,6 +1,6 @@
 {
   "name": "posture",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "an opinionated linter for swagger",
   "main": "src/cli.js",
   "author": "Patrick Dent",
