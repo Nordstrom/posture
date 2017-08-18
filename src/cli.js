@@ -13,7 +13,7 @@ import warnings from './warnings'
 import optimizations from './optimizations'
 
 program
-    .version('0.1.0')
+    .version(require('../package.json').version)
     .option('-s, --swagger [swagger]', 'path to swagger file if not in root directory')
     .parse(process.argv)
 
